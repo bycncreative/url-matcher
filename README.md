@@ -2,7 +2,7 @@
 
 Match url from url pattern list fastly.
 
-> url patterns:
+url patterns:
 
 	/objects/*/users	 (`*` stands for any characters between two `/` )
 
