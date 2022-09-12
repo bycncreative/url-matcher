@@ -23,17 +23,17 @@ export class UrlWildcharMatcher {
 		let n = this.patterns;
 		let arr = urlPath.split('/');
 		if(arr[0]=='') arr.shift();
-		console.log('path to find:', arr)
+		//console.log('path to find:', arr)
 		for(let i=0;i<arr.length;i++){
 			let a = arr[i];
 			if(!n)
 				break;
 			let na = n[a]||n['*'];
-			if(!na){
-				break;
-			}
 			if(na && i==arr.length-2){
 				return na.ptnLeaf;
+			}
+			if(!na){
+				break;
 			}
 			n = na.child
 		}
