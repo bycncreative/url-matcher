@@ -1,3 +1,4 @@
+import { assert } from "https://deno.land/std@0.155.0/testing/asserts.ts"
 import {Pattern, UrlWildcharMatcher } from "./UrlWildcharMatcher.js"
 
 
@@ -12,22 +13,44 @@ console.log(m.patterns)
 
 let url;
 let ptn;
+
+Deno.test("unit test",()=> {
+
+url = '/objects/global'
+ptn = m.find(url)
+console.log('found:',ptn,url)
+assert(!ptn)
+
 url = '/objects/global/users'
 ptn = m.find(url)
-console.log('found:',ptn)
+console.log('found:',ptn,url)
+assert(ptn)
+
+url = '/objects/global/users/00'
+ptn = m.find(url)
+console.log('found:',ptn,url)
+assert(!ptn)
+
 
 url = '/objects/0/role'
 ptn = m.find(url)
-console.log('found:',ptn)
+console.log('found:',ptn, url)
+assert(!ptn)
 
 url = '/objects/country/users'
 ptn = m.find(url)
-console.log('found:',ptn)
+console.log('found:',ptn, url)
+assert(ptn)
 
 url = '/objects/country'
 ptn = m.find(url)
-console.log('found:',ptn)
+console.log('found:',ptn, url)
+assert(!ptn)
 
 url = '/sites/abc'
 ptn = m.find(url)
-console.log('found:',ptn)
+console.log('found:',ptn,url)
+assert(ptn)
+
+
+})
