@@ -29,7 +29,7 @@ export class UrlWildcharMatcher {
 			if(!n)
 				break;
 			let na = n[a]||n['*'];
-			if(na && i==arr.length-2){
+			if(na && i==arr.length-1){
 				return na.ptnLeaf;
 			}
 			if(!na){
@@ -51,11 +51,11 @@ export class UrlWildcharMatcher {
 			if(!n) 
 				break;
 			if(n[a]) {
-				if(i==arr.length-2){
+				if(i==arr.length-1){
 					n[a].ptnLeaf = ptn;
 				}
 			}else{
-				n[a] = new Node(a,i==arr.length-2? ptn:null, {});
+				n[a] = new Node(a,i==arr.length-1? ptn:null, {});
 			}
 			n = n[a].child
 		}
