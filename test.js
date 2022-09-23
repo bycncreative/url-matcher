@@ -4,6 +4,8 @@ import {Pattern, UrlWildcharMatcher } from "./UrlWildcharMatcher.js"
 
 let patternList = [
 		new Pattern('/objects/*/users', 'User*'),
+		new Pattern('/objects/*/users/*', 'User*'),
+		new Pattern('/objects/*/users/sss', 'Usersss'),
 		new Pattern('/objects/*/roles', 'Roles*'),
 		new Pattern('/objects/0/users', 'User'),
 		new Pattern('/objects/*/users', 'User'),
@@ -16,11 +18,13 @@ console.log(m.patterns)
 let url;
 let ptn;
 
+
 Deno.test("unit test",()=> {
 
 url = '/objects/0/roles'
 ptn = m.find(url)
 console.log('found:',ptn)
+assert(ptn)
 
 url = '/objects/global'
 ptn = m.find(url)
@@ -32,10 +36,21 @@ ptn = m.find(url)
 console.log('found:',ptn,url)
 assert(ptn)
 
-url = '/objects/global/users/00'
+url = '/objects/global/users/a'
 ptn = m.find(url)
 console.log('found:',ptn,url)
-assert(!ptn)
+assert(ptn)
+
+url = '/objects/global/users/sss'
+ptn = m.find(url)
+console.log('found:',ptn,url)
+assert(ptn && ptn.userData=='Usersss')
+
+
+url = '/objects/global/users'
+ptn = m.find(url)
+console.log('found:',ptn,url)
+assert(ptn)
 
 
 url = '/objects/0/role'

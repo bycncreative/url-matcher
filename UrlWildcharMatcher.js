@@ -26,20 +26,24 @@ export class UrlWildcharMatcher {
 		let arr = urlPath.split('/');
 		if(arr[0]=='') arr.shift();
 		//console.log('path to find:', arr)
-		for(let i=0;i<arr.length;i++){
-			let a = arr[i];
-			if(!n)
-				break;
-			let na = n[a]||n['*'];
-			if(na && i==arr.length-1){
-				return na.ptnLeaf;
-			}
-			if(!na){
-				break;
-			}
-			n = na.child
+		return this._find(n,arr,0);
+	}
+
+	_find(n,arr,i){
+		//console.log(n, i);
+		if(!n || i>=arr.length) return null;
+		//console.log(arr[i]);
+		let a = arr[i]
+		let na = n[a]||n['*'];
+		if(!na) 
+			return null;
+		if(i==arr.length-1){
+			return na.ptnLeaf;
 		}
-		return null;
+		let r = this._find(na.child, arr, i+1);
+		if(!r && na.name !='*' && n['*'])
+			r = this._find(n['*'].child,arr,i+1);
+		return r;
 	}
 
 
