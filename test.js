@@ -3,8 +3,8 @@ import {Pattern, UrlWildcharMatcher } from "./UrlWildcharMatcher.js"
 
 
 let patternList = [
-		new Pattern('/objects/*/users', 'User'),
 		new Pattern('/objects/0/users', 'User'),
+		new Pattern('/objects/*/users', 'User'),
 		new Pattern('/objects/global/users', 'GlobalUser'),
 		new Pattern('/sites/*', 'City')
 ]
