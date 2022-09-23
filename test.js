@@ -2,7 +2,8 @@ import {Pattern, UrlWildcharMatcher } from "./UrlWildcharMatcher.js"
 
 
 let patternList = [
-		new Pattern('/objects/*/users', 'User'),
+		new Pattern('/objects/*/users', 'User*'),
+		new Pattern('/objects/*/roles', 'Roles*'),
 		new Pattern('/objects/0/users', 'User'),
 		new Pattern('/objects/global/users', 'GlobalUser'),
 		new Pattern('/sites/*', 'City')
@@ -12,6 +13,11 @@ console.log(m.patterns)
 
 let url;
 let ptn;
+
+url = '/objects/0/roles'
+ptn = m.find(url)
+console.log('found:',ptn)
+
 url = '/objects/global/users'
 ptn = m.find(url)
 console.log('found:',ptn)

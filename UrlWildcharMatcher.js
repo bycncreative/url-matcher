@@ -18,7 +18,9 @@ export class UrlWildcharMatcher {
 	constructor(patternList){
 		this.patterns = this._compile(patternList)
 	}	
-
+	/**
+	 *@returns Pattern object or null
+	 */
 	find(urlPath){
 		let n = this.patterns;
 		let arr = urlPath.split('/');
@@ -61,6 +63,18 @@ export class UrlWildcharMatcher {
 		}
 
 	}
+
+	/**  format:
+	 *   { 
+	 *      path1: {	name: 'path1', 
+	 *					pthLeaf: o,
+	 *					child: {pathi: {} } 
+	 *			   }
+	 *
+	 *		pathi:{  }
+	 *   }
+	 *
+	 */
 	_compile(patternList){
 		let cptns = {};
 		for(let ptn of patternList){
